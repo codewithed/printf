@@ -1,1 +1,1 @@
-ALX Project 0x11. C - printf
+The printf project is a collaboration between Edmund D and Ogonyi J
