@@ -1,73 +1,77 @@
-.TH _PRINTF 3 "18 October 2022" "1" "_printf Manual"
+./" This is _printf manpage
+.TH man 3 "17 May 2020" "1.0" "_printf man page"
 .SH NAME
-_printf()
-
-The _printf function echoes the functionality of printf().
+.B _printf
+- format and data.
 .SH SYNOPSIS
-.B #include "main.h"
-
-.B int _printf(const char \fI*format\fR,
-.B ...)
-
+_printf FORMAT [ARGUMENT]...
 .SH DESCRIPTION
-The functions in _printf() writes output according to a format as described below.
+Print ARGUMENT(s) according to FORMAT:
 
-.B Return Value
-.RS 3
-Upon successful return, the functions return the number of characters printed (excluding the null byte used to end output to strings).
-If an output error is encountered, a negative value is returned.
-.RE
+\\"     double quote.
 
-.B Format of the format string
-.RS 3
-The format string is a character string, beginning and ending in its initial shift state, if any. The format string is composed of zero or more  directives: ordinary  characters  (not  %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching  zero  or  more subsequent arguments.  Each conversion specification is introduced by the character %, and ends with a conversion specifier.
-By default, the arguments are used in the order given.
-.RE
+\\\\     backslash.
 
-.B The conversion specifier
-.RS 3
-A character that specifies the type of conversion to be applied. The conversion specifiers and their meanings are:
+\\n     new line.
 
-.B d, i
-.RS 6
-The \fIint\fR argument is converted to signed decimal notation.
-.RE
+\\r     carriage return.
 
-.B c
-.RS 6
-The \fIint\fR argument is converted to an unsigned char, and the resulting character is written.
-.RE
+\\t     horizontal tab.
 
-.B s
-.RS 6
-The \fIconst char *\fR argument is expected to be a pointer to an array of character type (pointer to a string).  Characters from the array are written up to (but not including) a terminating null byte ('\0').
-.RE
+%%     a single %.
 
-.B %
-.RS 6
-A '%' is written. No argument is converted.  The complete conversion specifications i '%%'.
-.RE
+.SH CONVERSION CHARACTERS
+.B The conversion specifiers and their meanings are:
+.IP -b 
+The unsigned int argument is converted to binary.
 
-.SH NOTES
-Currently, the program doesn't account for flags, fields, precision, or length modifiers.
+.IP -d,i
+The int argument is converted to signed decimal notation.
 
-.SH EXAMPLE
-.RS 3
-To print a sentence with conversion specifiers:
+.IP -c
+The int argument is converted to an unsigned char, and the resulting character is written.
 
-.RE
 
-.RS 8
-#include "main.h"
+.IP -o,u,x,X
+The unsigned int argument is converted to ( ) notation:
 
-_printf("The %s jumped %d times!", "dog", 4);
-.RE
+unsigned octal: (o).
 
-.RS 3
-Output : "The dog jumped 4 times!"
-.RE
+unsigned decimal: (u).
+
+unsigned hexadecimal: (x and X).
+
+.IP -s
+Characters from the array are written up to (but not including) a terminating null byte ('\0').
+	
+.IP -S 
+Characters from the array are written up to (but not including) a terminating null byte ('\0').
+
+Not include characters (0 < ASCII value < 32 or >= 127), are printed \x, , followed by the ASCII code value in hexadecimal (upper case - always 2 characters).
+
+.IP -p
+The void * pointer argument is printed in hexadecimal (as if by %#x or %#lx).
+
+.SH EXAMPLES
+
+.IP -print a string.
+_printf("This is a string");
+_printf("%s\n", "I am a string too!");
+
+.IP print char.
+_printf("Character:[%c]\n", 'H');
+
+.IP -print integuer.
+_printf("%d, %i\n", 2, 5);
 
 .SH SEE ALSO
-.B printf(3)
+
+.I printf(1), printf(3).
+
+.SH BUGS
+
+No known bugs.
+
 .SH AUTHOR
-Edmund Debrah, Ogonyi Joseph
+
+Edmond D. & Ogonyi j.
