@@ -1,33 +1,36 @@
 #ifndef MAIN_H
 #define MAIN_H
+
 #include <stdarg.h>
-#include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 /**
- * struct fmt - function to check for formats
- * @type: The format to print
- * @f: The print function to use
+ * struct structprint - structure containing
+ * @q: the location and method to translate data to characters.
+ * @u: print function for specific type.
+ *
+ * Return: int
  */
-typedef struct fmt
+typedef struct structprint
 {
-	char *type;
-	int (*f)();
-} fmt_t;
+	char *q;
+	int (*u)(char *format, va_list);
+} structype;
 
-int _printf(const char *format, ...);
-int print_op(const char *format, fmt_t *print_arr, va_list list);
-int ch(va_list character);
-int str(va_list string);
-int _int(va_list integ);
-int _ui(va_list unsign);
-int _oct(va_list octo);
-int _rot13(va_list rot);
-int _hex_str(unsigned int n, unsigned int hex, char alpha);
-int _hex_l(va_list hexa);
-int _hex_u(va_list hexa);
-int _strlen(char *s);
-int _bin(va_list bin);
-int _putchar(char c);
+int _putchar(char ch);
+int _puts(char *string);
+int printc(char *format, va_list);
+int printstr(char *format, va_list);
+int (*driver(char *format))(char *format, va_list);
+int _printf(char *format, ...);
+int printint(char *format, va_list pa);
+int integer(int number);
+int contadordigit(int number);
+int _abs(int number);
+int printpercent(char *format, va_list pa);
+int printhex(char *format, va_list);
+int printHEX(char *format, va_list);
+int printocta(char *format, va_list);
+int print_unsign(char *format, va_list);
 #endif
